@@ -34,6 +34,8 @@ function App() {
     setSelectedCategory(value);
   };
 
+  console.log(selectedCategory);
+
   return (
     <div className="app">
       <Form addExpenseRecord={addExpenseRecord} />
