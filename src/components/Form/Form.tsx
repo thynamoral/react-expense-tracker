@@ -45,10 +45,14 @@ const Form = ({ addExpenseRecord }: Form) => {
           Price
         </label>
         <input
-          {...register("price", { required: true, valueAsNumber: true })}
+          {...register("price", {
+            required: true,
+            valueAsNumber: true,
+          })}
           id="price"
           type="text"
           className="form-control"
+          pattern="^(?=.+)(?:[1-9]\d*|0)?(?:\.\d+)?$"
         />
         {errors.price?.type === "required" && (
           <p className="text-danger">Price is required.</p>
