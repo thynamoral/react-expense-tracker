@@ -8,10 +8,17 @@ type Expenses = {
 
 interface AllExpenses {
   expenses: Expenses[];
+  currentSelected: string;
   onChangeCategory: (event: ChangeEvent<HTMLSelectElement>) => void;
+  onDelete: (recordIndex: number) => void;
 }
 
-const AllExpenses = ({ expenses, onChangeCategory }: AllExpenses) => {
+const AllExpenses = ({
+  expenses,
+  currentSelected,
+  onChangeCategory,
+  onDelete,
+}: AllExpenses) => {
   return (
     <div className="all-expenses mt-3">
       <h1>All Expenses</h1>
@@ -36,16 +43,26 @@ const AllExpenses = ({ expenses, onChangeCategory }: AllExpenses) => {
           </tr>
         </thead>
         <tbody>
-          {expenses.map((expense, index) => (
-            <tr key={index}>
-              <td>{expense.desc}</td>
-              <td>${expense.price.toFixed(2)}</td>
-              <td>{expense.category}</td>
-              <td>
-                <button className="btn btn-danger">DELETE</button>
-              </td>
-            </tr>
-          ))}
+          {expenses
+            .filter((expense) => {
+              if (currentSelected == "allCategories") return expense;
+              return expense.category == currentSelected;
+            })
+            .map((expense, index) => (
+              <tr key={index}>
+                <td>{expense.desc}</td>
+                <td>${expense.price.toFixed(2)}</td>
+                <td>{expense.category}</td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => onDelete(index)}
+                  >
+                    DELETE
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

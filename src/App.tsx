@@ -6,12 +6,7 @@ import AllExpenses from "./components/AllExpenses";
 import { FormInput } from "./types";
 
 // category options
-const options = [
-  { value: "allCategories" },
-  { value: "groceries" },
-  { value: "utilities" },
-  { value: "entertainment" },
-];
+const options = ["allCategories", "groceries", "utilities", "entertainment"];
 
 function App() {
   const [allExpenses, setAllExpenses] = useState([
@@ -21,7 +16,7 @@ function App() {
       category: "groceries",
     },
   ]);
-  const [selectedCategory, setSelectedCategory] = useState(options[0].value);
+  const [selectedCategory, setSelectedCategory] = useState(options[0]);
 
   // handle form submit
   const addExpenseRecord = (data: FormInput) => {
@@ -34,12 +29,22 @@ function App() {
     setSelectedCategory(value);
   };
 
-  console.log(selectedCategory);
+  // handle onDelete expense record
+  const deleteRecord = (recordIndex: number) => {
+    setAllExpenses((currentExpenses) => {
+      return currentExpenses.filter((_, index) => index != recordIndex);
+    });
+  };
 
   return (
     <div className="app">
       <Form addExpenseRecord={addExpenseRecord} />
-      <AllExpenses expenses={allExpenses} onChangeCategory={onChangeCategory} />
+      <AllExpenses
+        expenses={allExpenses}
+        currentSelected={selectedCategory}
+        onChangeCategory={onChangeCategory}
+        onDelete={deleteRecord}
+      />
     </div>
   );
 }

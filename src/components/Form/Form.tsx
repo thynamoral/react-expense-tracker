@@ -21,6 +21,7 @@ const Form = ({ addExpenseRecord }: Form) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <h2>Expense Tracker Form</h2>
       <div className="mb-3">
         <label htmlFor="desc" className="form-label">
           Description
