@@ -66,6 +66,24 @@ const AllExpenses = ({
                 </tr>
               ))}
           </tbody>
+          <tfoot>
+            <tr>
+              <th>Total</th>
+              <th>
+                $
+                {expenses
+                  .filter((expense) => {
+                    if (currentSelected === "allCategories") return expense;
+                    return expense.category === currentSelected;
+                  })
+                  .reduce((sum, item) => {
+                    return sum + item.price;
+                  }, 0)}
+              </th>
+              <td></td>
+              <td></td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
