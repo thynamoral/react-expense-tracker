@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import "../../App.css";
 
 type Expenses = {
   desc: string;
