@@ -33,38 +33,40 @@ const AllExpenses = ({
         <option value="entertainment">Entertainment</option>
       </select>
 
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {expenses
-            .filter((expense) => {
-              if (currentSelected == "allCategories") return expense;
-              return expense.category == currentSelected;
-            })
-            .map((expense, index) => (
-              <tr key={index}>
-                <td>{expense.desc}</td>
-                <td>${expense.price.toFixed(2)}</td>
-                <td>{expense.category}</td>
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => onDelete(index)}
-                  >
-                    DELETE
-                  </button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <div className="table-content">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {expenses
+              .filter((expense) => {
+                if (currentSelected == "allCategories") return expense;
+                return expense.category == currentSelected;
+              })
+              .map((expense, index) => (
+                <tr key={index}>
+                  <td>{expense.desc}</td>
+                  <td>${expense.price.toFixed(2)}</td>
+                  <td>{expense.category}</td>
+                  <td>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => onDelete(index)}
+                    >
+                      DELETE
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
