@@ -47,7 +47,7 @@ const Form = ({ addExpenseRecord }: Form) => {
         <input
           {...register("price", { required: true, valueAsNumber: true })}
           id="price"
-          type="number"
+          type="text"
           className="form-control"
         />
         {errors.price?.type === "required" && (
